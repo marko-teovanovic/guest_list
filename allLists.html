@@ -3,9 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All lists</title>
+    <link rel="stylesheet" href="templates/AllListsStyle.css">
+    <title>All Guest Lists</title>
 </head>
 <body>
-    <h1>All list's</h1>
+    <div class="container">
+        <h2>All Guest Lists</h2>
+        <ul id="allLists"></ul>
+        <button type="button" onclick="window.location.href = 'index.html';">Home</button>
+    </div>
+
+    <script>
+        // Povlacenje svih lista iz lokala
+        let savedLists = JSON.parse(localStorage.getItem('guestLists')) || [];
+
+        function displayAllLists() {
+            var allListsContainer = document.getElementById('allLists');
+
+            savedLists.forEach(function (list, index) {
+                var listItem = document.createElement('li');
+                listItem.textContent = 'List ' + (index + 1);
+                listItem.onclick = function() {
+                    viewList(index);
+                };
+
+                allListsContainer.appendChild(listItem);
+            });
+        }
+
+        function viewList(index) {
+            window.location.href = 'viewList.html?index=' + index;
+        }
+
+        // Prikazivanje svih listi 
+        displayAllLists();
+    </script>
 </body>
 </html>
