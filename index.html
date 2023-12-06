@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest List</title>
+    <link rel="stylesheet" href="templates/IndexStyle.css" type="text/css">
+</head>
+<body>
+    
+    <h1>GUEST LIST</h1>
+
+    <script>
+
+        let create = document.createElement("button")
+        create.innerHTML = "Create new list"
+        create.onclick = function() {
+            window.location.href = "create.html"
+        }
+        document.body.appendChild(create)
+
+        let modify = document.createElement("button")
+        modify.innerHTML = "Modify list"
+        modify.onclick = function() {
+            window.location.href = "modify.html"
+        }
+        document.body.appendChild(modify)
+
+        let seeAll = document.createElement("button")
+        seeAll.innerHTML = "See all list's"
+        seeAll.onclick = function() {
+            window.location.href = "allLists.html"
+        }
+        document.body.appendChild(seeAll)
+
+    </script>
+
+</body>
+</html>

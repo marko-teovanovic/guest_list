@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="templates/CreateStyle.css">
+    <title>GUEST LIST</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Create New List</h2>
+        <form id="listForm">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required>
+            
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required>
+            
+            <label for="tableNumber">Table Number:</label>
+            <input type="text" id="tableNumber" name="tableNumber" required>
+            
+            <button type="button" onclick="addGuest()">Add Guest</button>
+            <button type="button" onclick="window.location.href = 'index.html';">Home</button>
+        </form>
+        
+        <h2>Guest List</h2>
+        <button type="button" id="saveList" name="saveList" onclick="saveGuestList()">Save list</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Table Number</th>
+                </tr>
+            </thead>
+            <tbody id="guestList"></tbody>
+        </table>
+    </div>
+
+    <script>
+        // Kreiranje niza za goste
+        var guests = [];
+    
+        // Check if the guest list exists in local storage
+        var storedGuestList = localStorage.getItem('guestList');
+    
+        // If it exists, parse the JSON string back into an array
+        if (storedGuestList) {
+            guests = JSON.parse(storedGuestList);
+        }
+    
+        // Update the guest list in the HTML
+        updateGuestList();
+    
+        function addGuest() {
+            // Kupeljene informacija iz inputa
+            var firstName = document.getElementById('firstName').value;
+            var lastName = document.getElementById('lastName').value;
+            var tableNumber = document.getElementById('tableNumber').value;
+    
+            // Kreiranje objekta sa podatcima iz inputa
+            var newGuest = {
+                firstName: firstName,
+                lastName: lastName,
+                tableNumber: tableNumber
+            };
+    
+            // Dodavanje gosta u niz
+            guests.push(newGuest);
+    
+            // Updejtovanje liste
+            updateGuestList();
+    
+            document.getElementById('firstName').value = '';
+            document.getElementById('lastName').value = '';
+            document.getElementById('tableNumber').value = '';
+        }
+    
+        function saveGuestList() {
+            // Konvertovanje to JSON string
+            var guestListJSON = JSON.stringify(guests);
+    
+            // Snimanje JSONa na local
+            localStorage.setItem('guestList', guestListJSON);
+    
+            alert('Guest list saved!');
+        }
+    
+        // Function to update the guest list in the HTML
+        function updateGuestList() {
+            var guestListTbody = document.getElementById('guestList');
+            guestListTbody.innerHTML = ''; // Clear the existing content
+    
+            guests.forEach(function (guest) {
+                var row = document.createElement('tr');
+                var firstNameCell = document.createElement('td');
+                var lastNameCell = document.createElement('td');
+                var tableNumberCell = document.createElement('td');
+    
+                firstNameCell.textContent = guest.firstName;
+                lastNameCell.textContent = guest.lastName;
+                tableNumberCell.textContent = guest.tableNumber;
+    
+                row.appendChild(firstNameCell);
+                row.appendChild(lastNameCell);
+                row.appendChild(tableNumberCell);
+    
+                guestListTbody.appendChild(row);
+            });
+        }
+    </script>
+</body>
+</html>

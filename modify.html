@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modify List</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+    
+    <h1>GUEST LIST</h1>
+
+    <script>
+
+
+function deleteAllGuests() {
+    localStorage.removeItem(jsonKey);
+
+    const tableBody = document.getElementById('guestTableBody');
+    tableBody.innerHTML = '';
+
+    lastUsedId = 0;
+}
+
+function updateGuestList() {
+            var guestListTbody = document.getElementById('guestList');
+
+            // Clear the current list
+            guestListTbody.innerHTML = '';
+
+            guests.forEach(guest => {
+            const row = document.createElement('tr');
+            row.innerHTML = `<td>${guest.firstName}</td><td>${guest.lastName}</td><td>${guest.tableNumber}</td>`;
+            guestListTbody.appendChild(row);
+        });
+
+    }
+
+    </script>
+
+</body>
+</html>
