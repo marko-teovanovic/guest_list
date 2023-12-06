@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="templates/ViewStyle.css">
+    <title>View Guest List</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Guest List Details</h2>
+        <div id="listDetails"></div>
+        <button type="button" onclick="window.location.href = 'allLists.html';">Back to All Lists</button>
+        <button type="button" onclick="window.location.href = 'modify.html';" >Modify</button>
+    </div>
+
+    <script>
+        // Preuzimanje svih sacuvanih lista iz lokala
+        let savedLists = JSON.parse(localStorage.getItem('guestLists')) || [];
+
+        // Preuzimanje indexa iz URLa
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedListIndex = parseInt(urlParams.get('index'));
+
+        function displayListDetails() {
+            var listDetailsContainer = document.getElementById('listDetails');
+
+            if (selectedListIndex >= 0 && selectedListIndex < savedLists.length) {
+                var selectedList = savedLists[selectedListIndex];
+
+                // Ispisivanje podataka iz izabrane liste
+                var detailsContent = "<strong>List Name:</strong> " + (selectedListIndex + 1) + "<br>";
+                detailsContent += "<strong>Guests:</strong><br>";
+
+                selectedList.forEach(function (guest) {
+                    detailsContent += "- " + guest.firstName + " " + guest.lastName + " (Table: " + guest.tableNumber + ")<br>";
+                });
+
+                listDetailsContainer.innerHTML = detailsContent;
+            } else {
+                listDetailsContainer.innerHTML = "Invalid list selection.";
+            }
+        }
+
+        // Prikaz detalja za izabranu listu
+        displayListDetails();
+    </script>
+</body>
+</html>

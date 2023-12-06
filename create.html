@@ -33,7 +33,6 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Table Number</th>
-                    <th>Option's</th>
                 </tr>
             </thead>
             <tbody id="guestList"></tbody>
@@ -41,17 +40,17 @@
     </div>
 
     <script>
-        // Retrieve saved lists from local storage
+        // Preuzimanje sacuvanih lista iz lokala
         let savedLists = JSON.parse(localStorage.getItem('guestLists')) || [];
 
-        // Function to create a new list
+        // Kreiranje nove list
         function createNewList() {
             return [];
         }
 
-        // Set the current list to a new list each time the page is loaded
-        let currentListIndex = savedLists.length; // Set to the index of the newly created list
-        let guests = createNewList(); // Create a new empty list
+        // Postavljanje nove liste na novu svaki put kad se ucita stranica
+        let currentListIndex = savedLists.length;
+        let guests = createNewList(); 
 
         function addGuest() {
             // Kupeljene informacija iz inputa
@@ -110,6 +109,7 @@
                 guestListTbody.appendChild(row);
             });
         }
+    
     </script>
 </body>
 </html>
