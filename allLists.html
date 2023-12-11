@@ -23,6 +23,17 @@
             savedLists.forEach(function (list, index) {
                 var listItem = document.createElement('li');
                 listItem.textContent = 'List ' + (index + 1);
+
+                // Dodavanje modify dugmeta
+                var modifyButton = document.createElement('button');
+                modifyButton.textContent = 'Modify';
+                modifyButton.onclick = function() {
+                    modifyList(index);
+                };
+
+                listItem.appendChild(modifyButton);
+
+                // Dodavanje eventa na liste
                 listItem.onclick = function() {
                     viewList(index);
                 };
@@ -37,6 +48,7 @@
 
         // Prikazivanje svih listi 
         displayAllLists();
+
     </script>
 </body>
 </html>

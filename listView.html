@@ -11,7 +11,7 @@
         <h2>Guest List Details</h2>
         <div id="listDetails"></div>
         <button type="button" onclick="window.location.href = 'allLists.html';">Back to All Lists</button>
-        <button type="button" onclick="window.location.href = 'modify.html';" >Modify</button>
+        <button type="button" onclick="modifyList();">Modify</button>
     </div>
 
     <script>
@@ -40,6 +40,65 @@
             } else {
                 listDetailsContainer.innerHTML = "Invalid list selection.";
             }
+        }
+
+        function modifyList() {
+            var listDetailsContainer = document.getElementById('listDetails');
+            var selectedList = savedLists[selectedListIndex];
+
+            listDetailsContainer.innerHTML = "";
+
+            // Kreiranje input polja za izmene
+            selectedList.forEach(function (guest, guestIndex) {
+                var inputContainer = document.createElement('div');
+                inputContainer.innerHTML = `
+                    <label for="firstName${guestIndex}">First Name:</label>
+                    <input type="text" id="firstName${guestIndex}" value="${guest.firstName}">
+                    <br>
+                    <label for="lastName${guestIndex}">Last Name:</label>
+                    <input type="text" id="lastName${guestIndex}" value="${guest.lastName}">
+                    <br>
+                    <label for="tableNumber${guestIndex}">Table Number:</label>
+                    <input type="text" id="tableNumber${guestIndex}" value="${guest.tableNumber}">
+                    <br><br>
+                `;
+                listDetailsContainer.appendChild(inputContainer);
+            });
+
+            // Save dugme
+            var saveButton = document.createElement('button');
+            saveButton.textContent = 'Save';
+            saveButton.onclick = function () {
+                saveChanges();
+            };
+            listDetailsContainer.appendChild(saveButton);
+        }
+
+        function saveChanges() {
+            var listDetailsContainer = document.getElementById('listDetails');
+            var updatedList = [];
+
+            // Retrieve modified values and update the list
+            for (var i = 0; i < listDetailsContainer.children.length - 1; i++) {
+                var firstName = document.getElementById(`firstName${i}`).value;
+                var lastName = document.getElementById(`lastName${i}`).value;
+                var tableNumber = document.getElementById(`tableNumber${i}`).value;
+
+                updatedList.push({
+                    firstName: firstName,
+                    lastName: lastName,
+                    tableNumber: tableNumber
+                });
+            }
+
+            // Update the savedLists array
+            savedLists[selectedListIndex] = updatedList;
+
+            // Save the updated list to localStorage
+            localStorage.setItem('guestLists', JSON.stringify(savedLists));
+
+            // Refresh the displayed list details
+            displayListDetails();
         }
 
         // Prikaz detalja za izabranu listu
