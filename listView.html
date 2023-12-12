@@ -78,7 +78,7 @@
             var listDetailsContainer = document.getElementById('listDetails');
             var updatedList = [];
 
-            // Retrieve modified values and update the list
+            // Kupljenje izmena u listi i cuvanje
             for (var i = 0; i < listDetailsContainer.children.length - 1; i++) {
                 var firstName = document.getElementById(`firstName${i}`).value;
                 var lastName = document.getElementById(`lastName${i}`).value;
@@ -91,13 +91,13 @@
                 });
             }
 
-            // Update the savedLists array
+            // Updejtovanje savedList arraya
             savedLists[selectedListIndex] = updatedList;
 
-            // Save the updated list to localStorage
+            // Snimanje izmenjene liste na lokal
             localStorage.setItem('guestLists', JSON.stringify(savedLists));
 
-            // Refresh the displayed list details
+            // Refresovanje liste za prikaz
             displayListDetails();
         }
 

@@ -24,14 +24,14 @@
                 var listItem = document.createElement('li');
                 listItem.textContent = 'List ' + (index + 1);
 
-                // Dodavanje modify dugmeta
-                var modifyButton = document.createElement('button');
-                modifyButton.textContent = 'Modify';
-                modifyButton.onclick = function() {
+                // Dodavanje see lists dugmeta
+                var seeLists = document.createElement('button');
+                seeLists.textContent = 'See list';
+                seeLists.onclick = function() {
                     modifyList(index);
                 };
 
-                listItem.appendChild(modifyButton);
+                listItem.appendChild(seeLists);
 
                 // Dodavanje eventa na liste
                 listItem.onclick = function() {
