@@ -26,12 +26,20 @@
 
                 // Dodavanje see lists dugmeta
                 var seeLists = document.createElement('button');
-                seeLists.textContent = 'See list';
+                seeLists.textContent = 'See lists';
                 seeLists.onclick = function() {
                     modifyList(index);
                 };
 
                 listItem.appendChild(seeLists);
+
+                var deleteListButton = document.createElement('button');
+                deleteListButton.innerHTML = "Delete list";
+                deleteListButton.onclick = function() {
+                    deleteList(index);
+                };
+
+                listItem.appendChild(deleteListButton);
 
                 // Dodavanje eventa na liste
                 listItem.onclick = function() {
@@ -40,6 +48,14 @@
 
                 allListsContainer.appendChild(listItem);
             });
+        }
+
+        function deleteList(index) {
+            if (confirm('Are you sure you want to delete this guest list?')) {
+                savedLists.splice(index, 1); // Uklanjanje liste sa indexom
+                localStorage.setItem('guestLists', JSON.stringify(savedLists));
+                location.reload(); // Refresovanje strane, zbog prikaza
+            }
         }
 
         function viewList(index) {
