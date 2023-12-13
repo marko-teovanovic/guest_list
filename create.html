@@ -52,28 +52,36 @@
         let guests = createNewList(); 
 
         function addGuest() {
-            // Kupeljene informacija iz inputa
-            var firstName = document.getElementById('firstName').value;
-            var lastName = document.getElementById('lastName').value;
-            var tableNumber = document.getElementById('tableNumber').value;
-    
-            // Kreiranje objekta sa podatcima iz inputa
-            var newGuest = {
-                firstName: firstName,
-                lastName: lastName,
-                tableNumber: tableNumber
-            };
-    
-            // Dodavanje gosta u niz
-            guests.push(newGuest);
-    
-            // Updejtovanje liste
-            updateGuestList();
-    
-            document.getElementById('firstName').value = '';
-            document.getElementById('lastName').value = '';
-            document.getElementById('tableNumber').value = '';
-        }
+    // Kupeljene informacija iz inputa
+    var firstName = document.getElementById('firstName').value;
+    var lastName = document.getElementById('lastName').value;
+    var tableNumber = document.getElementById('tableNumber').value;
+
+    // Provera da li su sva polja popunjena
+    if (firstName && lastName && tableNumber) {
+        // Kreiranje objekta sa podatcima iz inputa
+        var newGuest = {
+            firstName: firstName,
+            lastName: lastName,
+            tableNumber: tableNumber
+        };
+
+        // Dodavanje gosta u niz
+        guests.push(newGuest);
+
+        // Updejtovanje liste
+        updateGuestList();
+
+        // Resetovanje polja nakon dodavanja gosta
+        document.getElementById('firstName').value = '';
+        document.getElementById('lastName').value = '';
+        document.getElementById('tableNumber').value = '';
+
+    } else { //Uslov
+        alert('Please fill out all fields.');
+    }
+
+}
 
         function clearList() {
             guests = createNewList(); // Kreiranje nove prazne liste
