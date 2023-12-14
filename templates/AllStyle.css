@@ -18,6 +18,24 @@ h2 {
     color: #333;
 }
 
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    transition: background-color 0.3s ease-in-out;
+}
+
 button {
     background-color: #4caf50;
     color: #fff;
@@ -25,28 +43,21 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.delete {
+    background-color: #dc3545;
 }
 
 button:hover {
     background-color: #45a049;
 }
 
-
-#allLists {
-    list-style-type: none;
-    padding: 0;
+li button {
+    margin-left: auto;
 }
 
-#allLists li {
-    background-color: #fff;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-}
-
-#allLists li:hover {
-    background-color: #f4f4f4;
+button + button {
+    margin-left: 20px;
 }

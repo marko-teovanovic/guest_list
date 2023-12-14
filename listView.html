@@ -34,7 +34,7 @@
                 // Dodavanje dugmeta za brisanje svakog elementa posebno
                 selectedList.forEach(function (guest, guestIndex) {
                     detailsContent += `- ${guest.firstName} ${guest.lastName} (Table: ${guest.tableNumber}) 
-                        <button type='button' onclick='removeGuest(${guestIndex})'>Remove</button><br>`;
+                        <button type='button' id='remove' onclick='removeGuest(${guestIndex})'>Remove</button><br>`;
                 });
 
                 listDetailsContainer.innerHTML = detailsContent;

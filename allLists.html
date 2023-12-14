@@ -24,17 +24,20 @@
                 var listItem = document.createElement('li');
                 listItem.textContent = 'List ' + (index + 1);
 
-                // Dodavanje see lists dugmeta
+                // Dodavanje see list dugmeta
                 var seeLists = document.createElement('button');
-                seeLists.textContent = 'See list';
+                seeLists.innerHTML = 'See list';
+                seeLists.id = 'see'
                 seeLists.onclick = function() {
                     modifyList(index);
                 };
 
                 listItem.appendChild(seeLists);
 
+                // Dodavanje dugmeta delete za listu
                 var deleteListButton = document.createElement('button');
                 deleteListButton.innerHTML = "Delete list";
+                deleteListButton.id = 'delete'
                 deleteListButton.onclick = function() {
                     deleteList(index);
                 };
