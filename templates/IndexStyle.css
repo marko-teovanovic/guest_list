@@ -1,6 +1,6 @@
 body {
     font-family: 'Helvetica', sans-serif;
-    background: linear-gradient(to right, #00ff9d40, #ff666669);
+    background-image: url("background.jpg");
     margin: 0;
     padding: 0;
     display: flex;
@@ -11,8 +11,8 @@ body {
   }
   
   h1 {
-    color: #333;
-    font-size: 2em;
+    color: rgb(42, 201, 140);
+    font-size: 80px;
     margin-bottom: 20px;
   }
   
