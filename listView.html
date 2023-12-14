@@ -31,15 +31,33 @@
                 // Ispisivanje podataka iz izabrane liste
                 var detailsContent = "<strong>List Name:</strong> " + (selectedListIndex + 1) + "<br>";
                 detailsContent += "<strong>Guests:</strong><br>";
-
-                selectedList.forEach(function (guest) {
-                    detailsContent += "- " + guest.firstName + " " + guest.lastName + " (Table: " + guest.tableNumber + ")<br>";
+                // Dodavanje dugmeta za brisanje svakog elementa posebno
+                selectedList.forEach(function (guest, guestIndex) {
+                    detailsContent += `- ${guest.firstName} ${guest.lastName} (Table: ${guest.tableNumber}) 
+                        <button type='button' onclick='removeGuest(${guestIndex})'>Remove</button><br>`;
                 });
 
                 listDetailsContainer.innerHTML = detailsContent;
             } else {
                 listDetailsContainer.innerHTML = "Invalid list selection.";
             }
+        }
+
+        function removeGuest(guestIndex) {
+            var listDetailsContainer = document.getElementById('listDetails');
+            var selectedList = savedLists[selectedListIndex];
+
+            // Brisanje gosta po indexu
+            selectedList.splice(guestIndex, 1);
+
+            // Updejtovanje savedList arraya
+            savedLists[selectedListIndex] = selectedList;
+
+            // Snimanje na lokal
+            localStorage.setItem('guestLists', JSON.stringify(savedLists));
+
+            // Refresovanje
+            displayListDetails();
         }
 
         function modifyList() {
