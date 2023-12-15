@@ -16,59 +16,59 @@
 
     <script>
         // Preuzimanje svih sacuvanih lista iz lokala
-        let savedLists = JSON.parse(localStorage.getItem('guestLists')) || [];
+        let savedLists = JSON.parse(localStorage.getItem('guestLists')) || []
 
         // Preuzimanje indexa iz URLa
-        const urlParams = new URLSearchParams(window.location.search);
-        const selectedListIndex = parseInt(urlParams.get('index'));
+        const urlParams = new URLSearchParams(window.location.search)
+        const selectedListIndex = parseInt(urlParams.get('index'))
 
         function displayListDetails() {
-            var listDetailsContainer = document.getElementById('listDetails');
+            var listDetailsContainer = document.getElementById('listDetails')
 
             if (selectedListIndex >= 0 && selectedListIndex < savedLists.length) {
-                var selectedList = savedLists[selectedListIndex];
+                var selectedList = savedLists[selectedListIndex]
 
                 // Ispisivanje podataka iz izabrane liste
-                var detailsContent = "<strong>List Name:</strong> " + (selectedListIndex + 1) + "<br>";
-                detailsContent += "<strong>Guests:</strong><br>";
+                var detailsContent = "<strong>List Name:</strong> " + (selectedListIndex + 1) + "<br>"
+                detailsContent += "<strong>Guests:</strong><br>"
                 // Dodavanje dugmeta za brisanje svakog elementa posebno
                 selectedList.forEach(function (guest, guestIndex) {
                     detailsContent += `- ${guest.firstName} ${guest.lastName} (Table: ${guest.tableNumber}) 
-                        <button type='button' id='remove' onclick='removeGuest(${guestIndex})'>Remove</button><br>`;
-                });
+                        <button type='button' id='remove' onclick='removeGuest(${guestIndex})'>Remove</button><br>`
+                })
 
-                listDetailsContainer.innerHTML = detailsContent;
+                listDetailsContainer.innerHTML = detailsContent
             } else {
-                listDetailsContainer.innerHTML = "Invalid list selection.";
+                listDetailsContainer.innerHTML = "Invalid list selection."
             }
         }
 
         function removeGuest(guestIndex) {
-            var listDetailsContainer = document.getElementById('listDetails');
-            var selectedList = savedLists[selectedListIndex];
+            var listDetailsContainer = document.getElementById('listDetails')
+            var selectedList = savedLists[selectedListIndex]
 
             // Brisanje gosta po indexu
-            selectedList.splice(guestIndex, 1);
+            selectedList.splice(guestIndex, 1)
 
             // Updejtovanje savedList arraya
-            savedLists[selectedListIndex] = selectedList;
+            savedLists[selectedListIndex] = selectedList
 
             // Snimanje na lokal
-            localStorage.setItem('guestLists', JSON.stringify(savedLists));
+            localStorage.setItem('guestLists', JSON.stringify(savedLists))
 
             // Refresovanje
-            displayListDetails();
+            displayListDetails()
         }
 
         function modifyList() {
-            var listDetailsContainer = document.getElementById('listDetails');
-            var selectedList = savedLists[selectedListIndex];
+            var listDetailsContainer = document.getElementById('listDetails')
+            var selectedList = savedLists[selectedListIndex]
 
-            listDetailsContainer.innerHTML = "";
+            listDetailsContainer.innerHTML = ""
 
             // Kreiranje input polja za izmene
             selectedList.forEach(function (guest, guestIndex) {
-                var inputContainer = document.createElement('div');
+                var inputContainer = document.createElement('div')
                 inputContainer.innerHTML = `
                     <label for="firstName${guestIndex}">First Name:</label>
                     <input type="text" id="firstName${guestIndex}" value="${guest.firstName}">
@@ -79,48 +79,48 @@
                     <label for="tableNumber${guestIndex}">Table Number:</label>
                     <input type="text" id="tableNumber${guestIndex}" value="${guest.tableNumber}">
                     <br><br>
-                `;
-                listDetailsContainer.appendChild(inputContainer);
+                `
+                listDetailsContainer.appendChild(inputContainer)
             });
 
             // Save dugme
-            var saveButton = document.createElement('button');
-            saveButton.textContent = 'Save';
+            var saveButton = document.createElement('button')
+            saveButton.textContent = 'Save'
             saveButton.onclick = function () {
-                saveChanges();
-            };
-            listDetailsContainer.appendChild(saveButton);
+                saveChanges()
+            }
+            listDetailsContainer.appendChild(saveButton)
         }
 
         function saveChanges() {
-            var listDetailsContainer = document.getElementById('listDetails');
-            var updatedList = [];
+            var listDetailsContainer = document.getElementById('listDetails')
+            var updatedList = []
 
             // Kupljenje izmena u listi i cuvanje
             for (var i = 0; i < listDetailsContainer.children.length - 1; i++) {
-                var firstName = document.getElementById(`firstName${i}`).value;
-                var lastName = document.getElementById(`lastName${i}`).value;
-                var tableNumber = document.getElementById(`tableNumber${i}`).value;
+                var firstName = document.getElementById(`firstName${i}`).value
+                var lastName = document.getElementById(`lastName${i}`).value
+                var tableNumber = document.getElementById(`tableNumber${i}`).value
 
                 updatedList.push({
                     firstName: firstName,
                     lastName: lastName,
                     tableNumber: tableNumber
-                });
+                })
             }
 
             // Updejtovanje savedList arraya
-            savedLists[selectedListIndex] = updatedList;
+            savedLists[selectedListIndex] = updatedList
 
             // Snimanje izmenjene liste na lokal
-            localStorage.setItem('guestLists', JSON.stringify(savedLists));
+            localStorage.setItem('guestLists', JSON.stringify(savedLists))
 
             // Refresovanje liste za prikaz
-            displayListDetails();
+            displayListDetails()
         }
 
         // Prikaz detalja za izabranu listu
-        displayListDetails();
+        displayListDetails()
     </script>
 </body>
 </html>

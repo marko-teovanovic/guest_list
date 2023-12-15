@@ -40,22 +40,22 @@
 
     <script>
         // Preuzimanje sacuvanih lista iz lokala
-        let savedLists = JSON.parse(localStorage.getItem('guestLists')) || [];
+        let savedLists = JSON.parse(localStorage.getItem('guestLists')) || []
 
         // Kreiranje nove list
         function createNewList() {
-            return [];
+            return []
         }
 
         // Postavljanje nove liste na novu svaki put kad se ucita stranica
         let currentListIndex = savedLists.length;
-        let guests = createNewList(); 
+        let guests = createNewList()
 
         function addGuest() {
     // Kupeljene informacija iz inputa
-    var firstName = document.getElementById('firstName').value;
-    var lastName = document.getElementById('lastName').value;
-    var tableNumber = document.getElementById('tableNumber').value;
+    var firstName = document.getElementById('firstName').value
+    var lastName = document.getElementById('lastName').value
+    var tableNumber = document.getElementById('tableNumber').value
 
     // Provera da li su sva polja popunjena
     if (firstName && lastName && tableNumber) {
@@ -64,57 +64,57 @@
             firstName: firstName,
             lastName: lastName,
             tableNumber: tableNumber
-        };
+        }
 
         // Dodavanje gosta u niz
-        guests.push(newGuest);
+        guests.push(newGuest)
 
         // Updejtovanje liste
-        updateGuestList();
+        updateGuestList()
 
         // Resetovanje polja nakon dodavanja gosta
-        document.getElementById('firstName').value = '';
-        document.getElementById('lastName').value = '';
-        document.getElementById('tableNumber').value = '';
+        document.getElementById('firstName').value = ''
+        document.getElementById('lastName').value = ''
+        document.getElementById('tableNumber').value = ''
 
     } else { //Uslov
-        alert('Please fill out all fields.');
+        alert('Please fill out all fields.')
     }
 
 }
 
         function clearList() {
-            guests = createNewList(); // Kreiranje nove prazne liste
-            updateGuestList();
+            guests = createNewList() // Kreiranje nove prazne liste
+            updateGuestList()
         }
 
         function saveGuestList() {
             savedLists.push(guests); // Cuvanje trenutne liste
-            localStorage.setItem('guestLists', JSON.stringify(savedLists));
-            alert('Guest list saved!');
+            localStorage.setItem('guestLists', JSON.stringify(savedLists))
+            alert('Guest list saved!')
             
             // Kreiranje prazne liste za sledeci put (jer prilikom klika se prikazuje prazna lista)
-            currentListIndex = savedLists.length; // Index nove liste
-            guests = createNewList();
-            updateGuestList();
+            currentListIndex = savedLists.length // Index nove liste
+            guests = createNewList()
+            updateGuestList()
         }
 
         // Updejtovanje liste u HTMLu
         function updateGuestList() {
-            var guestListTbody = document.getElementById('guestList');
-            guestListTbody.innerHTML = ''; 
+            var guestListTbody = document.getElementById('guestList')
+            guestListTbody.innerHTML = ''
 
             guests.forEach(function (guest) {
-                var row = document.createElement('tr');
+                var row = document.createElement('tr')
                 
                 ['firstName', 'lastName', 'tableNumber'].forEach(function (property) {
-                    var cell = document.createElement('td');
-                    cell.textContent = guest[property];
-                    row.appendChild(cell);
-                });
+                    var cell = document.createElement('td')
+                    cell.textContent = guest[property]
+                    row.appendChild(cell)
+                })
 
-                guestListTbody.appendChild(row);
-            });
+                guestListTbody.appendChild(row)
+            })
         }
     
     </script>

@@ -15,54 +15,53 @@
 
     <script>
         // Povlacenje svih lista iz lokala
-        let savedLists = JSON.parse(localStorage.getItem('guestLists')) || [];
+        let savedLists = JSON.parse(localStorage.getItem('guestLists')) || []
 
         function displayAllLists() {
-            var allListsContainer = document.getElementById('allLists');
+            var allListsContainer = document.getElementById('allLists')
 
             savedLists.forEach(function (list, index) {
-                var listItem = document.createElement('li');
-                listItem.textContent = 'List ' + (index + 1);
+                var listItem = document.createElement('li')
+                listItem.textContent = 'List ' + (index + 1)
 
                 // Dodavanje see list dugmeta
-                var seeLists = document.createElement('button');
-                seeLists.innerHTML = 'See list';
+                var seeLists = document.createElement('button')
+                seeLists.innerHTML = 'See list'
                 seeLists.id = 'see'
                 seeLists.onclick = function() {
-                    modifyList(index);
-                };
-
-                listItem.appendChild(seeLists);
+                    modifyList(index)
+                }
+                
+                listItem.appendChild(seeLists)
 
                 // Dodavanje dugmeta delete za listu
-                var deleteListButton = document.createElement('button');
-                deleteListButton.innerHTML = "Delete list";
+                var deleteListButton = document.createElement('button')
+                deleteListButton.innerHTML = "Delete list"
                 deleteListButton.id = 'delete'
                 deleteListButton.onclick = function() {
-                    deleteList(index);
+                    deleteList(index)
                 };
 
                 listItem.appendChild(deleteListButton);
 
                 // Dodavanje eventa na liste
                 listItem.onclick = function() {
-                    viewList(index);
+                    viewList(index)
                 };
 
-                allListsContainer.appendChild(listItem);
+                allListsContainer.appendChild(listItem)
             });
         }
 
         function deleteList(index) {
             if (confirm('Are you sure you want to delete this guest list?')) {
-                savedLists.splice(index, 1); // Uklanjanje liste sa indexom
-                localStorage.setItem('guestLists', JSON.stringify(savedLists));
-                location.reload(); // Refresovanje strane, zbog prikaza
+                savedLists.splice(index, 1) // Uklanjanje liste sa indexom
+                localStorage.setItem('guestLists', JSON.stringify(savedLists))
+                location.reload() // Refresovanje strane, zbog prikaza
             }
         }
-        
         // Prikazivanje svih listi 
-        displayAllLists();
+        displayAllLists()
 
     </script>
 </body>
